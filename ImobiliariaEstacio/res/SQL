@@ -1,0 +1,43 @@
+CREATE TABLE endereco(
+id_endereco serial PRIMARY KEY NOT NULL,
+rua VARCHAR NOT NULL,
+numero VARCHAR NOT NULL,
+bairro VARCHAR NOT NULL,
+cep VARCHAR NOT NULL,
+cidade VARCHAR NOT NULL,
+estado VARCHAR NOT NULL);
+
+create table funcionario(
+id serial primary key not null,
+nome varchar not null,
+sobrenome varchar not null,
+cpf varchar not null,
+rg varchar not null,
+login varchar not null,
+senha varchar not null);
+
+create table imovel(
+id serial primary key not null,
+tipo varchar not null,
+valor integer not null,
+status varchar not null,
+area varchar not null,
+codigo varchar not null,
+id_endereco integer not null,
+FOREIGN KEY (id_endereco) REFERENCES endereco (id_endereco)
+);
+
+create table proprietario(
+id serial primary key not null,
+nome varchar not null,
+sobrenome varchar not null,
+cpf varchar not null,
+rg varchar not null,
+id_endereco integer not null,
+FOREIGN KEY (id_endereco) REFERENCES endereco (id_endereco)
+);
+
+
+select i.tipo, i.valor, e.rua from imovel i
+join endereco e
+on i.id_endereco = e.id_endereco;
